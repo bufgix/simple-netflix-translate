@@ -1,0 +1,63 @@
+@import "../styles/fonts";
+@import "../styles/variables";
+
+.snt {
+  &-float-btn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: black;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    opacity: 0.2;
+    transition: 0.2s;
+    border: none;
+
+    &-active {
+      opacity: 1;
+    }
+  }
+
+  &-panel {
+    position: absolute;
+    display: flex;
+    padding: 10px 30px;
+    background-color: black;
+    border: 1px solid white;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 9999;
+
+    &-hide {
+      display: none;
+    }
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+
+      & > li {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+        align-items: center;
+        margin-top: 10px;
+
+        button {
+          border: none;
+          text-decoration: underline;
+          background-color: transparent;
+        }
+      }
+    }
+
+    * {
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+}

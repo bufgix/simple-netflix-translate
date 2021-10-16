@@ -1,0 +1,29 @@
+@import "../styles/fonts";
+@import "../styles/variables";
+@import "../styles/reset";
+@import "~webext-base-css/webext-base.css";
+
+body {
+  color: $greyWhite;
+  background-color: $black;
+}
+
+form.options {
+  padding: 30px 0px;
+  input {
+    &:focus {
+      border: 1px solid $red;
+    }
+  }
+  button {
+    cursor: pointer;
+    background-color: $red;
+    color: white;
+
+    &:hover {
+      background-color: $red !important;
+      opacity: 0.9;
+      color: white !important;
+    }
+  }
+}
