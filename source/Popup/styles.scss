@@ -3,51 +3,34 @@
 @import "../styles/variables";
 
 body {
-  color: $black;
-  background-color: $greyWhite;
+  color: $greyWhite;
+  background-color: $black;
+  font-family: $nunito;
 }
 
-
 #popup {
-  min-width: 350px;
-  padding: 30px 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   h2 {
     font-size: 25px;
     text-align: center;
+    margin-top: 1rem;
   }
 
-  #options__button {
-    width: 50%;
-    background: green;
-    color: white;
-    font-weight: 500;
-    border-radius: 15px;
-    padding: 5px 10px;
-    justify-content: center;
-    margin: 20px auto;
-    cursor: pointer;
-    opacity: 0.8;
-    display: flex;
+  code {
+    padding: 3px 4px;
+    background-color: #b00020;
+    border-radius: 3px;
   }
 
-  .links__holder {
-    ul {
-      display: flex;
-      margin-top: 1em;
-      justify-content: space-around;
-
-      li {
-        button {
-          border-radius: 25px;
-          font-size: 20px;
-          font-weight: 600;
-          padding: 10px 17px;
-          background-color: rgba(0, 0, 255, 0.7);
-          color: white;
-          cursor: pointer;
-        }
-      }
-    }
+  a {
+    outline: none;
+    color: #b00020;
+    font-weight: bold;
+    text-decoration: none;
   }
 }

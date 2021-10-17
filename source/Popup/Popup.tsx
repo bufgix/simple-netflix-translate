@@ -8,51 +8,59 @@ function openWebPage(url: string): Promise<Tabs.Tab> {
 }
 
 const Popup: React.FC = () => {
+  const [currentTab, setCurrentTab] = React.useState<Tabs.Tab>();
   React.useEffect(() => {
     browser.runtime.onMessage.addListener((message) => {
       console.log(message);
     });
   }, []);
+
+  const isNetflixWatch = React.useMemo(() => {
+    if (currentTab && currentTab.url) {
+      const url = new URL(currentTab.url);
+      return (
+        url.hostname === "www.netflix.com" && /\/watch\/*/g.test(url.pathname)
+      );
+    }
+    return false;
+  }, [currentTab?.url]);
+
+  React.useEffect(() => {
+    browser.tabs
+      .query({ active: true, lastFocusedWindow: true })
+      .then((tabs) => {
+        setCurrentTab(tabs[0]);
+      });
+    browser.tabs.onUpdated.addListener((_, __, tabInfo) => {
+      setCurrentTab(tabInfo);
+    });
+  }, []);
+
   return (
     <section id="popup">
-      <h2>WEB-EXTENSION-STARTER hey</h2>
-      <button
-        id="options__button"
-        type="button"
-        onClick={(): Promise<Tabs.Tab> => {
-          return openWebPage("options.html");
-        }}
-      >
-        Options Page
-      </button>
-      <div className="links__holder">
-        <ul>
-          <li>
-            <button
-              type="button"
-              onClick={(): Promise<Tabs.Tab> => {
-                return openWebPage(
-                  "https://github.com/abhijithvijayan/web-extension-starter"
-                );
-              }}
-            >
-              GitHub
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={(): Promise<Tabs.Tab> => {
-                return openWebPage(
-                  "https://www.buymeacoffee.com/abhijithvijayan"
-                );
-              }}
-            >
-              Buy Me A Coffee
-            </button>
-          </li>
-        </ul>
-      </div>
+      <img
+        width={50}
+        height={50}
+        alt="Logo"
+        src={browser.runtime.getURL("assets/simple_netflix_translte_logo.png")}
+      />
+      <h2>Simple Netflix Translate</h2>
+      {isNetflixWatch ? (
+        <p>
+          Press <code>t</code> key to open translator
+        </p>
+      ) : (
+        <p>
+          Open{" "}
+          <a
+            href="#"
+            onClick={() => openWebPage("https://www.netflix.com/browse")}
+          >
+            Netflix
+          </a>{" "}
+          and watch some video
+        </p>
+      )}
     </section>
   );
 };
