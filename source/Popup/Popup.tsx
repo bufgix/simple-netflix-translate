@@ -9,6 +9,7 @@ function openWebPage(url: string): Promise<Tabs.Tab> {
 
 const Popup: React.FC = () => {
   const [currentTab, setCurrentTab] = React.useState<Tabs.Tab>();
+
   React.useEffect(() => {
     browser.runtime.onMessage.addListener((message) => {
       console.log(message);

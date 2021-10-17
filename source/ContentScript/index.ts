@@ -25,7 +25,8 @@ class Injector {
       case EVENTS.TAB_UPDATE:
         if (this.checkNetflixWatch()) {
           if (!this.panel.isMounted) {
-            (this.panel as Panel).render();
+            this.panel.render();
+            this.panel.hide();
           }
           this.subtitleWrapper = document.querySelector(
             ".player-timedtext"
